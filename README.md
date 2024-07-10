@@ -31,8 +31,6 @@ project-directory/
 │   │   │   ├── images/
 │   ├── templates/
 │   │   ├── index.html
-│   │   ├── page1.html
-│   │   ├── page2.html
 │
 └── README.md
 Setup Instructions
