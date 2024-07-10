@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+  <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/global1.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/page1.css') }}" rel="stylesheet" type="text/css">
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;800&display=swap"
+  />
+  <style>
+    /* Adjusted CSS for skip and send buttons */
+    .skip-button-container-parent {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f0f0f0; /* Adjust hover background color */
+    }
+
+    .skip, .send-button-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 15px; /* Adjusted padding */
+      background-color: #007bff; /* Blue color for send button */
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif; /* Apply Inter font */
+      border-radius: 5px;
+      width: 100px; /* Adjust width as needed */
+      height: 40px; /* Adjusted height */
+    }
+
+    .skip {
+      background-color: #6c757d; /* Dark grey color for skip button */
+      width: 100px; /* Same width as send button */
+      height: 40px; /* Same height as send button */
+      transition: background-color 0.3s ease; /* Transition for hover effect */
+    }
+
+    .skip:hover {
+      background-color: #495057; /* Darker grey color on hover */
+    }
+
+    /* Matching font and size for send button */
+    .send {
+      font-size: 16px; /* Same font size as skip button */
+      font-family: 'Inter', sans-serif; /* Apply Inter font */
+    }
+  </style>
+</head>
+<body>
+  <div class="macbook-air-7">
+    <div class="main">
+      <div class="main-child"></div>
+      <div class="chat-container">
+        <button class="chat-area">
+          <div class="chat-area-child"></div>
+          <div class="chat-message">
+            <div class="chat-with-us">Chat with us</div>
+          </div>
+          <img class="charmcross-icon" alt="" src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/charmcross.svg') }}" />
+        </button>
+      </div>
+      <div class="form-container">
+        <div class="quick-introduction-parent">
+          <h3 class="quick-introduction">Quick Introduction</h3>
+          <div class="please-leave-your">
+            Please leave your contact details so we can provide you with the
+            best possible service
+          </div>
+        </div>
+        <div class="name-field">
+          <div class="name">Name</div>
+        </div>
+        <div class="input-fields">
+          <div class="input-label-container">
+            <input type="text" class="enter-your-name" id="name" placeholder="Enter your name">
+            <div class="input-dividers"></div>
+          </div>
+        </div>
+        <div class="email-field">
+          <div class="email">Email</div>
+        </div>
+        <div class="input-fields1">
+          <div class="enter-your-email-address-parent">
+            <input type="email" class="enter-your-email" id="email" placeholder="Enter your email address">
+            <div class="frame-child"></div>
+          </div>
+        </div>
+        <div class="button-container">
+          <div class="skip-button-container-parent">
+            <button class="skip" onclick="goToPage2()">Skip</button>
+            <button class="send-button-container" onclick="storeDataAndGoToPage2()">
+              <div class="send-button-container-child"></div>
+              <div class="send">Send</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function storeDataAndGoToPage2() {
+      // Get the input values
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+
+      // Validate input fields
+      if (name === "" || email === "") {
+        alert("Please enter both name and email.");
+        return;
+      }
+
+      // Store the values in local storage
+      localStorage.setItem('name', name);
+      localStorage.setItem('email', email);
+
+      // Redirect to page2
+      window.location.href = '/page2';
+    }
+
+    function goToPage2() {
+      // Redirect to page2
+      window.location.href = '/page2';
+    }
+  </script>
+</body>
+</html>

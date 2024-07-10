@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeetius - Sports Management & Automation</title>
+    <link rel="icon" type="image/png" href="https://zeetius.com/favicon.ico">
+    <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/blue1f6b.css') }}" rel="stylesheet" type="text/css">
+    
+    
+    
+    
+    <style>
+        /* Custom Styles */
+        #chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border: none;
+            background: none;
+            padding: 0;
+            cursor: pointer;
+            z-index: 1000;
+            animation: pulse 1s infinite;
+        }
+
+        #chatbot-button img {
+            width: 100px; /* Increased size */
+            height: 100px;
+            border-radius: 50%; /* Circular button */
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #content-container {
+            background-color: inherit; /* To match the existing page's background */
+            padding: 20px;
+        }
+    </style>
+    <style>
+        /* Adjusted CSS for skip and send buttons */
+        .skip-button-container-parent {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #f0f0f0; /* Adjust hover background color */
+        }
+    
+        .skip, .send-button-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 15px; /* Adjusted padding */
+          background-color: #007bff; /* Blue color for send button */
+          color: white;
+          border: none;
+          cursor: pointer;
+          font-size: 16px;
+          font-family: 'Inter', sans-serif; /* Apply Inter font */
+          border-radius: 5px;
+          width: 100px; /* Adjust width as needed */
+          height: 40px; /* Adjusted height */
+        }
+    
+        .skip {
+          background-color: #6c757d; /* Dark grey color for skip button */
+          width: 100px; /* Same width as send button */
+          height: 40px; /* Same height as send button */
+          transition: background-color 0.3s ease; /* Transition for hover effect */
+        }
+    
+        .skip:hover {
+          background-color: #495057; /* Darker grey color on hover */
+        }
+    
+        /* Matching font and size for send button */
+        .send {
+          font-size: 16px; /* Same font size as skip button */
+          font-family: 'Inter', sans-serif; /* Apply Inter font */
+        }
+      </style>
+</head>
+<body>
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="https://zeetius.com/" class="logo">
+                            <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/logo-zeetius.png') }}" alt="zeetius">
+
+                        </a>
+                        
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="https://zeetius.com/">Home</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">Discover</a>
+                                <ul>
+                                    <li><a href="https://zeetius.com/Discover/Features">Features</a></li>
+                                    <li><a href="https://zeetius.com/Discover/Sports-Management-Solutions-for-associations">For Association</a></li>
+                                    <li><a href="https://zeetius.com/Discover/Sports-Management-Solutions-for-tournaments">For Tournaments</a></li>
+                                    <li><a href="https://zeetius.com/Discover/Sports-Management-Solutions-for-academies">For Academies</a></li>
+                                    <li><a href="https://zeetius.com/Discover/latest-blogs">Latest Blogs</a></li>
+                                    <li><a href="https://zeetius.com/Discover/Testimonials">Testimonials</a></li> 
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:;">About</a>
+                                <ul>
+                                    <li><a href="https://zeetius.com/About/Company">Company</a></li>
+                                    <li><a href="https://zeetius.com/About/Press-Release">Press Release</a></li>
+                                    <li><a href="https://zeetius.com/About/Company#our-team">Our Team</a></li>
+                                    <li><a href="https://zeetius.com/About/zeetius-case-studies">Case Study</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="https://zeetius.com/Home/Contact">Contact</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">
+                                    Live
+                                    <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/live.gif') }}" style="width:20px">
+                                </a>
+                                
+                                <ul>
+                                    <li><a href="https://zeetius.com/Live/LiveScore">Badminton Live</a></li>
+                                    <li><a href="https://zeetius.com/Live/TTLiveScore">Table Tennis Live</a></li>
+                                    <li><a href="https://zeetius.com/Live/Results">Results</a></li>
+                                    <li><a href="https://zeetius.com/Live/UpcomingMatches">Upcoming Matches</a></li>
+                                    <li><a href="https://www.youtube.com/channel/UCxtPOehfzpo0lfNC60q0IKg" target="_blank">Live Streaming</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <a class="menu-trigger">
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                        <!-- ***** Header Buttons Start ***** -->
+                        <ul class="header-buttons">
+                            <li><a class="btn-nav-line" href="https://zeetius.com/#" onclick="RequestDemomodal()">Request A Demo</a></li>
+                            <li><a class="btn-nav-primary" target="_blank" href="https://zeetius.com/Home/Login">Sign In</a></li>
+                        </ul>
+                        <!-- ***** Header Buttons End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+    <!-- ***** Welcome Area Start ***** -->
+    <div class="welcome-area" id="welcome">
+        <!-- ***** Header Text Start ***** -->
+        <div class="header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 col-sm-12 align-self-center">
+                        <h1>Powering the Future of Sports with Automation</h1>
+                        <p>Digitally Transform Your Sports Management Workflow and Boost Performance with Automation</p>
+                        <div class="email-box">
+                            <div class="input">
+                                <input type="email" id="emailRequestDemo1" placeholder="Enter your email">
+                                <button id="btnsubmit">Submit</button> 
+                            </div>
+                            <div id="warningMessage" class="warning-message" style="color:red;padding-left:15px;"></div> 
+                            <span>Request A Demo</span>
+                        </div>
+                    </div>
+                    <div class="offset-lg-1 col-lg-6 col-md-12 col-sm-12 align-self-center">
+                        <div class="home-img-group">
+                            <div class="home-img img-1 imgfix_top_container" style="overflow: hidden;">
+                                <div id="imgfix_wrapper_layer_1_0" class="imgfix_wrapper_layer" style="position: relative; padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden;">
+                                    <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/1.jpg') }}" alt="" class="imgfix_src_img" style="opacity: 1;">
+                                </div>
+                            </div>
+                            
+                            <div class="home-img img-2 imgfix_top_container" style="overflow: hidden;">
+                                <div id="imgfix_wrapper_layer_1_1" class="imgfix_wrapper_layer" style="position: relative; padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden;">
+                                    <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/home-bar-mid1.jpg') }}" alt="" class="imgfix_src_img" style="opacity: 1;">
+                                    <!-- ***** Play Button Start ***** -->
+                                    <div class="play-button-wrapper">
+                                        <!-- Your play button content here -->
+                                    </div>
+                                    <!-- ***** Play Button End ***** -->
+                                </div>
+                                
+                            </div>
+                            <div class="home-img img-3 imgfix_top_container" style="overflow: hidden;">
+                                <div id="imgfix_wrapper_layer_1_2" class="imgfix_wrapper_layer" style="position: relative; padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden;">
+                                    <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/home_bar31.jpg') }}" alt="" class="imgfix_src_img" style="opacity: 1;">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** Header Text End ***** -->
+    </div>
+    <!-- ***** Welcome Area End ***** -->
+    <!-- ***** Features Small Start ***** -->
+    <section class="section padding-top-0 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="row">
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s" data-scroll-reveal-id="1" style="-webkit-transform: translatey(50px);transform: translatey(50px);opacity: 0;" data-scroll-reveal-initialized="true">
+                            <a href="https://zeetius.com/#" class="features-small-item">
+                                <div class="icon">
+                                    <i class="fa fa-clone"></i>
+                                </div>
+                                <h5 class="features-title">Advanced Automation</h5>
+                            </a>
+                        </div>
+                        <!-- ***** Features Small Item End ***** -->
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s" data-scroll-reveal-id="2" style="-webkit-transform: translatey(50px);transform: translatey(50px);opacity: 0;" data-scroll-reveal-initialized="true">
+                            <a href="https://zeetius.com/#" class="features-small-item">
+                                <div class="icon">
+                                    <i class="fa fa-paper-plane"></i>
+                                </div>
+                                <h5 class="features-title">Efficient Management</h5>
+                            </a>
+                        </div>
+                        <!-- ***** Features Small Item End ***** -->
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s" data-scroll-reveal-id="3" style="-webkit-transform: translatey(50px);transform: translatey(50px);opacity: 0;" data-scroll-reveal-initialized="true">
+                            <a href="https://zeetius.com/#" class="features-small-item">
+                                <div class="icon">
+                                    <i class="fa fa-bar-chart"></i>
+                                </div>
+                                <h5 class="features-title">Data Insights</h5>
+                            </a>
+                        </div>
+                        <!-- ***** Features Small Item End ***** -->
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.8s" data-scroll-reveal-id="4" style="-webkit-transform: translatey(50px);transform: translatey(50px);opacity: 0;" data-scroll-reveal-initialized="true">
+                            <a href="https://zeetius.com/#" class="features-small-item">
+                                <div class="icon">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <h5 class="features-title">Community Engagement</h5>
+                            </a>
+                        </div>
+                        <!-- ***** Features Small Item End ***** -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ***** Features Small End ***** -->
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <ul class="footer-menu">
+                        <li><a href="https://zeetius.com/">Home</a></li>
+                        <li><a href="https://zeetius.com/Discover/Features">Features</a></li>
+                        <li><a href="https://zeetius.com/About/Company">About Us</a></li>
+                        <li><a href="https://zeetius.com/Home/Contact">Contact Us</a></li>
+                        <li><a href="https://zeetius.com/Home/Login">Login</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <ul class="footer-social">
+                        <li><a href="https://www.facebook.com/zeetius" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/zeetius" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://www.linkedin.com/company/zeetius" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="https://www.instagram.com/zeetius/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.youtube.com/channel/UCxtPOehfzpo0lfNC60q0IKg" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ***** Footer End ***** -->
+    <!-- ***** Chatbot Button ***** -->
+    <button id="chatbot-button" onclick="openOverlay()">
+        <img src="https://img.freepik.com/premium-vector/chat-bot-logo-smiling-virtual-assistant-bot-smiles-icon-logo-robot-head-with-headphones_843540-91.jpg">
+    </button>
+    
+    <!-- Overlay content -->
+    <div id="overlay">
+        <iframe src="{{ url_for('page1') }}"></iframe>
+    </div>
+    
+    <!-- Content Container for Injected Content -->
+    <div id="content-container"></div>
+    <!-- ***** JavaScripts ***** -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/contact.js') }}"></script>
+    <script src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/script.min.js') }}"></script>
+    
+    
+    
+    <script>
+      function openOverlay() {
+    var overlay = document.getElementById('overlay');
+    overlay.style.display = 'block';
+}
+
+// Close the overlay if clicked outside the iframe
+window.onclick = function(event) {
+    var overlay = document.getElementById('overlay');
+    if (event.target == overlay) {
+        overlay.style.display = "none";
+    }
+}
+
+    </script>
+    <style>
+        /* Hide the overlay by default */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+    z-index: 1000; /* higher z-index to ensure it's above other content */
+}
+
+/* Center the iframe in the overlay */
+#overlay iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; /* Adjust width as needed */
+    height: 80%; /* Adjust height as needed */
+    border: none; /* Remove iframe border */
+}
+
+    </style>
+</body>
+</html>

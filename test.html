@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+  <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/global.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/page2.css') }}" rel="stylesheet" type="text/css">
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+  />
+  <style>
+    .input-field input {
+      border: none;
+      outline: none;
+      background: none;
+      width: 90%; /* Increased width */
+      font-size: 16px; /* Adjust font size as needed */
+      padding: 10px;
+    }
+    .send-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .new-message, .bot-message {
+      border: none;
+      overflow-wrap: break-word; /* Ensure the text wraps */
+      word-wrap: break-word; /* IE 5.5-7 */
+      word-break: break-word; /* IE 8-9 */
+      outline: none;
+      background: none;
+      border-radius: 7px;
+      font-size: 16px;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #ffffff;
+      width: 80%; /* Increased width */
+      max-width: 600px; /* Max width for larger screens */
+      resize: none; /* Prevent resizing */
+    }
+    
+    .chat-bubble-wrapper {
+      display: flex;
+      width: 100%; /* Adjusted width */
+      flex-direction: column;
+      align-items: flex-start;
+      max-height: 350px; /* Set the max height as per requirement */
+      overflow-y: auto; /* Enable vertical scrolling */
+    }
+    .new-message-container {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+    .bot-message-container {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="macbook-air-1">
+    <div class="rectangle-parent">
+      <div class="frame-child"></div>
+      <div class="frame-parent">
+        <button class="rectangle-group">
+          <div class="frame-item"></div>
+          <div class="chat-with-us-wrapper">
+            <div class="chat-with-us">Chat with us</div>
+          </div>
+          <img class="charmcross-icon" alt="" src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/charmcross.svg') }}" />
+        </button>
+        <div class="chat-bubble-wrapper">
+          <div class="chat-bubble">
+            <div class="agent-avatar">
+              <img class="twemojirobot-icon" loading="lazy" alt="" src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/twemojirobot.svg') }}" />
+
+              <div class="agent-name">
+                <div class="sergent">Sergent</div>
+              </div>
+            </div>
+            <div class="chat-message">
+              <div class="chat-message-child"></div>
+              <div class="hi-i-am-container">
+                <p class="hi-i-am">Hi! I am Sergent, your friendly</p>
+                <p class="customer-service-bot">customer service bot</p>
+              </div>
+            </div>
+            <div class="chat-message1">
+              <div class="chat-message-item"></div>
+              <div class="do-you-need">
+                Do you need any help today, Frenchie?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="faq" id="faq">
+        <div class="faq-list">
+          <div class="faq-items">
+            <div class="faq-pair-one">
+              <div class="faq-pair-one-child"></div>
+              <div class="how-do-i-container">
+                <p class="how-do-i">How do I register</p>
+              </div>
+            </div>
+            <div class="faq-pair-two">
+              <div class="faq-pair-two-child"></div>
+              <div class="how-do-i-container1">
+                <p class="how-do-i1">How do I change the password?</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-items1">
+            <div class="rectangle-container">
+              <div class="frame-inner"></div>
+              <div class="how-do-i-container2">
+                <p class="how-do-i2">How do I enroll in a tournament</p>
+              </div>
+            </div>
+            <div class="frame-div">
+              <div class="rectangle-div"></div>
+              <div class="how-do-i3">How do I renew my membership?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input">
+        <div class="divider"></div>
+        <div class="input-field">
+          <input type="text" id="userInput" placeholder="Type something to send" />
+        </div>
+        <button class="send-button" onclick="addMessage()">
+          <img class="emojioneright-arrow-icon" loading="lazy" alt="" src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/emojionerightarrow.svg') }}" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function addMessage() {
+      var inputField = document.getElementById('userInput');
+      var userInput = inputField.value;
+
+      if (userInput.trim() !== "") {
+        var faq = document.getElementById('faq');
+        if (faq) {
+          faq.parentNode.removeChild(faq);
+        }
+
+        var newMessage = document.createElement('div');
+        newMessage.className = 'new-message';
+        newMessage.textContent = userInput;
+
+        var newMessageContainer = document.createElement('div');
+        newMessageContainer.className = 'new-message-container';
+        newMessageContainer.appendChild(newMessage);
+
+        var chatBubbleWrapper = document.querySelector('.chat-bubble-wrapper');
+        chatBubbleWrapper.appendChild(newMessageContainer);
+
+        // Send the user input to the Flask server and get the bot response
+        try {
+          const response = await fetch('/get_answer', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ question: userInput })
+          });
+
+          const data = await response.json();
+          var botResponse = data.answer;
+        } catch (error) {
+          console.error('Error:', error);
+          var botResponse = "Sorry, there was an error processing your request.";
+        }
+
+        var botMessage = document.createElement('div');
+        botMessage.className = 'bot-message';
+        botMessage.innerHTML = botResponse;  // Use innerHTML to render HTML content
+
+        var botMessageContainer = document.createElement('div');
+        botMessageContainer.className = 'bot-message-container';
+        botMessageContainer.appendChild(botMessage);
+
+        chatBubbleWrapper.appendChild(botMessageContainer);
+
+        inputField.value = "";
+      }
+    }
+  </script>
+</body>
+</html>
